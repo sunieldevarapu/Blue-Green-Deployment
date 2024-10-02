@@ -63,15 +63,15 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: app-rolebinding
-  namespace: webapps 
+  namespace: webapps
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: app-role 
 subjects:
-- namespace: webapps 
+- namespace: webapps
   kind: ServiceAccount
-  name: jenkins 
+  name: jenkins
 ```
 
 
@@ -111,3 +111,12 @@ roleRef:
 ### Generate token using service account in the namespace
 
 [Create Token](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#:~:text=To%20create%20a%20non%2Dexpiring,with%20that%20generated%20token%20data.)
+
+apiVersion: v1
+kind: Secret
+type: kubernetes.io/service-account-token
+metadata:
+  name: mysecretname
+  annotations:
+    kubernetes.io/service-account.name: jenkins
+
